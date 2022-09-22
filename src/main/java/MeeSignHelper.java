@@ -26,6 +26,7 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.security.interfaces.ECPublicKey;
 import java.math.BigInteger;
+import java.nio.file.Paths;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -58,6 +59,7 @@ import org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder;
 import org.bouncycastle.util.encoders.Hex;
 
 public class MeeSignHelper {
+    private static final String KEY_PATH = "key";
     private final X509CertificateHolder serverCertificate;
     private final PEMKeyPair serverPrivateKey;
 
@@ -68,7 +70,9 @@ public class MeeSignHelper {
 
         Security.addProvider(new BouncyCastleProvider());
         java.util.logging.Logger.getLogger("org.apache.pdfbox").setLevel(java.util.logging.Level.OFF);
-        MeeSignHelper helper = new MeeSignHelper("server-cert.pem", "server-key.pem");
+        final String certificatePath = Paths.get(KEY_PATH, "server-cert.pem").toString();
+        final String privateKeyPath = Paths.get(KEY_PATH, "server-key.pem").toString();
+        MeeSignHelper helper = new MeeSignHelper(certificatePath, privateKeyPath);
 
         switch (args[0]) {
             case "cert":
