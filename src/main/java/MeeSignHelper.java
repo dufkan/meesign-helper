@@ -59,7 +59,7 @@ import org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder;
 import org.bouncycastle.util.encoders.Hex;
 
 public class MeeSignHelper {
-    private static final String KEY_PATH = "key";
+    private static final String KEY_PATH = "keys";
     private final X509CertificateHolder serverCertificate;
     private final PEMKeyPair serverPrivateKey;
 
@@ -70,8 +70,8 @@ public class MeeSignHelper {
 
         Security.addProvider(new BouncyCastleProvider());
         java.util.logging.Logger.getLogger("org.apache.pdfbox").setLevel(java.util.logging.Level.OFF);
-        final String certificatePath = Paths.get(KEY_PATH, "server-cert.pem").toString();
-        final String privateKeyPath = Paths.get(KEY_PATH, "server-key.pem").toString();
+        final String certificatePath = Paths.get(KEY_PATH, "meesign-ca-cert.pem").toString();
+        final String privateKeyPath = Paths.get(KEY_PATH, "meesign-ca-key.pem").toString();
         MeeSignHelper helper = new MeeSignHelper(certificatePath, privateKeyPath);
 
         switch (args[0]) {
